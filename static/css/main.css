@@ -136,7 +136,7 @@ img {
 /* --- Navbar --- */
 
 .navbar-custom {
-  background: #F5F5F5;
+  background: #deecfe;
   border-bottom: 1px solid #EAEAEA;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -363,6 +363,7 @@ footer .theme-by {
 .post-preview .post-title {
   font-size: 30px;
   margin-top: 0;
+  color: #2466b9;
 }
 .post-preview .post-subtitle {
   margin: 0;
@@ -410,11 +411,13 @@ footer .theme-by {
 .post-preview .post-read-more {
   font-weight: 800;
   float: right;
+  color: #2466b9;
 }
 
 @media only screen and (min-width: 768px) {
   .post-preview .post-title {
-    font-size: 36px;
+    font-size: 36px
+    color: #2466b9;
   }
 }
 
@@ -512,11 +515,11 @@ footer .theme-by {
 }
 .intro-header .page-heading h1,
 .intro-header .tags-heading h1 {
-  margin-top: 0;
+  margin-top: 40px;
   font-size: 50px;
 }
 .intro-header .post-heading h1 {
-  margin-top: 0;
+  margin-top: 60px;
   font-size: 35px;
 }
 .intro-header .page-heading .page-subheading,
@@ -567,7 +570,7 @@ footer .theme-by {
   }
   .intro-header .page-heading h1,
   .intro-header .tags-heading h1 {
-    font-size: 80px;
+    font-size: 60px;
   }
   .intro-header .post-heading h1 {
     font-size: 50px;
@@ -804,3 +807,6 @@ h4.see-also {
  ul.share li:hover .fab {
   transform: scale(1.4)
 }
+
+/* --- Smaller code --- */
+code{padding:2px 4px;font-size:85%;color:#bb1212;background-color:#c5919114;border-radius:4px}
