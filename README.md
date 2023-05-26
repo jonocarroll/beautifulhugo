@@ -1,6 +1,10 @@
-# Beautiful Hugo - A port of Beautiful Jekyll Theme
+# Beautiful Hugo - An adaptation of the Beautiful Jekyll theme
 
 ![Beautiful Hugo Theme Screenshot](https://github.com/jonocarroll/beautifulhugo/blob/master/images/screenshot.png)
+
+## Live demo
+
+See https://hugo-theme-beautifulhugo.netlify.app/
 
 ## Installation
 
@@ -8,8 +12,17 @@
     $ cd themes
     $ git submodule add https://github.com/jonocarroll/beautifulhugo.git beautifulhugo
     
+Add Beautifulhugo:
 
-See [the Hugo documentation](https://gohugo.io/themes/installing/) for more information.
+    $ git submodule add https://github.com/halogenica/beautifulhugo.git themes/beautifulhugo
+
+Copy the content of `exampleSite` at the root of your project:
+
+    cp -r themes/beautifulhugo/exampleSite/* . -iv
+    
+Start Hugo:
+
+    hugo serve
 
 ## Extra Features
 
@@ -61,18 +74,23 @@ To use this feature, uncomment and fill out the `disqusShortname` parameter in `
 
 ### Staticman support
 
-Add *staticman* configuration section in `config.toml` or `config.yaml`
+Add *Staticman* configuration section in `config.toml` or `config.yaml`
 
-Sample `config.yaml` configuration
+Sample `config.toml` configuration
 
 ```
-  staticman:
-    api: https://api.staticman.net/v2/entry/<USERNAME>/<REPOSITORY-BLOGNAME>/master/comments
-    pulls: https://github.com/<USERNAME>/<REPOSITORY-BLOGNAME>/pulls
-    recaptcha:
+[Params.staticman]
+  api = "https://<API-ENDPOINT>/v3/entry/{GIT-HOST}/<USERNAME>/<REPOSITORY-BLOGNAME>/master/comments"
+[Params.staticman.recaptcha]
       sitekey: "6LeGeTgUAAAAAAqVrfTwox1kJQFdWl-mLzKasV0v"
       secret: "hsGjWtWHR4HK4pT7cUsWTArJdZDxxE2pkdg/ArwCguqYQrhuubjj3RS9C5qa8xu4cx/Y9EwHwAMEeXPCZbLR9eW1K9LshissvNcYFfC/b8KKb4deH4V1+oqJEk/JcoK6jp6Rr2nZV4rjDP9M7nunC3WR5UGwMIYb8kKhur9pAic="
 ```
+
+Note: The public `API-ENDPOINT` https://staticman.net is currently hitting its API limit, so one may use other API instances to provide Staticman comment service.
+
+The section `[Params.staticman.recaptcha]` is *optional*.  To add reCAPTCHA to your site, you have to replace the default values with your own ones (to be obtained from Google.)  The site `secret` has to be encrypted with
+
+    https://<API-ENDPOINT>/v3/encrypt/<SITE-SECRET>
 
 You must also configure the `staticman.yml` in you blog website.
 
@@ -99,17 +117,20 @@ comments:
     secret: "hsGjWtWHR4HK4pT7cUsWTArJdZDxxE2pkdg/ArwCguqYQrhuubjj3RS9C5qa8xu4cx/Y9EwHwAMEeXPCZbLR9eW1K9LshissvNcYFfC/b8KKb4deH4V1+oqJEk/JcoK6jp6Rr2nZV4rjDP9M7nunC3WR5UGwMIYb8kKhur9pAic="
 ```
 
-
+If you *don't* have the section `[Params.staticman]` in `config.toml`, you *won't* need the section `reCaptcha`  in `staticman.yml`
 
 ### Google Analytics
 
 To add Google Analytics, simply sign up to [Google Analytics](https://www.google.com/analytics/) to obtain your Google Tracking ID, and add this tracking ID to the `googleAnalytics` parameter in `config.toml`.
 
+Note that the Google Analytics tracking code will only be inserted into the page when the site isn't served on Hugo's built-in server, to prevent tracking from local testing environments.
+
 ### Commit SHA on the footer
 
-If the source of your site is in a Git repo, the SHA corresponding to the commit the site is built from can be shown on the footer. To do so a parameter `commit` has to be defined in the config file:
+If the source of your site is in a Git repo, the SHA corresponding to the commit the site is built from can be shown on the footer. To do so, two site parameters `commit` has to be defined in the config file `config.toml`:
 
 ```
+enableGitInfo = true
 [Params]
   commit = "https://github.com/<username>/<siterepo>/"
 ```
@@ -129,6 +150,46 @@ Additionally, a 'Link to source' link can be added to the post titles by setting
 
 This assumes your source is an `Rmd` file which can be found at `{{ .Site.Params.commit }}blob/master/content/{{ .File.Dir }}{{ .File.BaseFileName }}.Rmd`, such as when hosting on GitHub. This has not yet been tested with bundle posts but may work if `.File.Dir` behaves.
 
+See at [vincenttam/vincenttam.gitlab.io](https://gitlab.com/vincenttam/vincenttam.gitlab.io) for an example of how to add it to a continuous integration system.
+
+### Multilingual
+
+To allow Beautiful Hugo to go multilingual, you need to define the languages
+you want to use inside the `languages` parameter on `config.toml` file, also
+redefining the content dir for each one. Check the `i18n/` folder to see all
+languages available.
+
+```toml
+[languages]
+  [languages.en] 
+    contentDir = "content/en" # English
+  [languages.ja]
+    contentDir = "content/ja" # Japanese
+  [languages.br]
+    contentDir = "content/br" # Brazilian Portuguese
+```
+
+Now you just need to create a subdir within the `content/` folder for each
+language and just put stuff inside `page/` and `post/` regular directories.
+```
+content/      content/      content/  
+└── en/       └── br/       └── ja/ 
+    ├── page/     ├── page/     ├── page/
+    └── post/     └── post/     └── post/
+
+```
+
+### Self Hosted assets for GDPR / EU-DSGVO compliance
+
+With default settings, visiting to a website using Beautifulhugo connects also to remote services like google fonts or jsdelivr to embed fonts, js and other assets.
+
+To avoid this, set the following param in config.toml:
+
+```
+[Params]
+  selfHosted = true
+```
+
 ### Extra shortcodes
 
 There are two extra shortcodes provided (along with the customized figure shortcode):
@@ -138,9 +199,9 @@ There are two extra shortcodes provided (along with the customized figure shortc
 This simply adds the html5 detail attribute, supported on all *modern* browsers. Use it like this:
 
 ```
-{{% details "This is the details title (click to expand)" %}}
+{{< details "This is the details title (click to expand)" >}}
 This is the content (hidden until clicked).
-{{% /details %}}
+{{< /details >}}
 ```
 
 #### Split
@@ -152,7 +213,7 @@ This adds a two column side-by-side environment (will turn into 1 col for narrow
 This is column 1.
 {{< column >}}
 This is column 2.
-{{< endcolumn >}}
+{{< endcolumns >}}
 ```
 
 ## About
