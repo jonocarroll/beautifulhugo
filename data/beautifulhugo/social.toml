@@ -41,6 +41,12 @@ title = "Twitter"
 icon = "fab fa-twitter"
 
 [[social_icons]]
+id = "slack"
+url = "https://%s.slack.com/"
+title = "Slack"
+icon = "fab fa-slack"
+
+[[social_icons]]
 id = "reddit"
 url = "https://reddit.com/u/%s"
 title = "Reddit"
@@ -110,7 +116,7 @@ icon = "fas fa-gamepad"
 id = "keybase"
 url = "https://keybase.io/%s"
 title = "Keybase"
-icon = "fas fa-key"
+icon = "fab fa-keybase"
 
 [[social_icons]]
 id = "vk"
@@ -137,7 +143,74 @@ title = "500px"
 icon = "fab fa-500px"
 
 [[social_icons]]
+id = "codepen"
+url = "https://codepen.io/%s"
+title = "CodePen"
+icon = "fab fa-codepen"
+
+[[social_icons]]
+id = "kaggle"
+url = "https://www.kaggle.com/%s"
+title = "kaggle"
+icon = "fab fa-kaggle"
+
+[[social_icons]]
 id = "mastodon"
 url = "https://%s"
 title = "Mastodon"
 icon = "fab fa-mastodon"
+rel = "me"
+
+[[social_icons]]
+id = "weibo"
+url = "https://weibo.com/%s"
+title = "Weibo"
+icon = "fab fa-weibo"
+
+[[social_icons]]
+id = "medium"
+url = "https://medium.com/@%s"
+title = "Medium"
+icon = "fab fa-medium"
+
+[[social_icons]]
+id = "discord"
+url = "https://discord.gg/%s"
+title = "Discord"
+icon = "fab fa-discord"
+
+[[social_icons]]
+id = "strava"
+url = "https://www.strava.com/athletes/%s"
+title = "Strava"
+icon = "fab fa-strava"
+
+[[social_icons]]
+id = "steam"
+url = "https://steamcommunity.com/id/%s"
+title = "Steam"
+icon = "fab fa-steam"
+
+[[social_icons]]
+id = "quora"
+url = "https://www.quora.com/profile/%s"
+title = "Quora"
+icon = "fab fa-quora"
+
+[[social_icons]]
+id = "amazonwishlist"
+url = "https://amzn.com/w/%s"
+title = "Amazon Wishlist"
+icon = "fab fa-amazon"
+
+[[social_icons]]
+id = "slideshare"
+url = "https://www.slideshare.net/%s"
+title = "Slideshare"
+icon = "fab fa-slideshare"
+
+[[social_icons]]
+id = "angellist"
+url = "https://www.angel.co/p/%s"
+title = "AngelList"
+icon = "fab fa-angellist"
