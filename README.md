@@ -1,6 +1,6 @@
 # Beautiful Hugo - An adaptation of the Beautiful Jekyll theme
 
-![Beautiful Hugo Theme Screenshot](https://github.com/halogenica/beautifulhugo/blob/master/images/screenshot.png)
+![Beautiful Hugo Theme Screenshot](https://github.com/jonocarroll/beautifulhugo/blob/master/images/screenshot.png)
 
 ## Live demo
 
@@ -8,8 +8,10 @@ See https://hugo-theme-beautifulhugo.netlify.app/
 
 ## Installation
 
-Install Hugo and create a new site. See [the Hugo documentation](https://gohugo.io/getting-started/quick-start/) for details.
-
+    $ mkdir themes
+    $ cd themes
+    $ git submodule add https://github.com/jonocarroll/beautifulhugo.git beautifulhugo
+    
 Add Beautifulhugo:
 
     $ git submodule add https://github.com/halogenica/beautifulhugo.git themes/beautifulhugo
@@ -139,10 +141,25 @@ If the source of your site is in a Git repo, the SHA corresponding to the commit
 ```
 enableGitInfo = true
 [Params]
-  commit = "https://github.com/<username>/<siterepo>/tree/"
+  commit = "https://github.com/<username>/<siterepo>/"
+```
+  
+(note that the parameter in [halogenica/beautifulhugo](https://github.com/halogenica/beautifulhugo) also has `/tree/`.
+
+### Link to Source in Post Headers
+
+Additionally, a 'Link to source' link can be added to the post titles by setting another parameter `linkToSource`:
+
+```
+[Params]
+  linkToSource = true
 ```
   
 This can be achieved by running the next command prior to calling Hugo:
+
+![Link to Source](https://github.com/jonocarroll/beautifulhugo/blob/master/images/linkToSource.png)
+
+This assumes your source is an `Rmd` file which can be found at `{{ .Site.Params.commit }}blob/master/content/{{ .File.Dir }}{{ .File.BaseFileName }}.Rmd`, such as when hosting on GitHub. This has not yet been tested with bundle posts but may work if `.File.Dir` behaves.
 
 See at [vincenttam/vincenttam.gitlab.io](https://gitlab.com/vincenttam/vincenttam.gitlab.io) for an example of how to add it to a continuous integration system.
 
@@ -225,8 +242,8 @@ author:
 
 ## About
 
-This is an adaptation of the Jekyll theme [Beautiful Jekyll](https://deanattali.com/beautiful-jekyll/) by [Dean Attali](https://deanattali.com/aboutme#contact). It supports most of the features of the original theme, and many new features. It has diverged from the Jekyll theme over time, with years of community updates.
+This is a fork of the Hugo theme [Beautiful Hugo](https://github.com/halogenica/beautifulhugo) by [Michael Romero](https://github.com/halogenica), personalised for [jonocarroll.com.au](https://jonocarroll.com.au). That is a port of the Jekyll theme [Beautiful Jekyll](https://deanattali.com/beautiful-jekyll/) by [Dean Attali](https://deanattali.com/aboutme#contact). It supports most of the features of the original theme.
 
 ## License
 
-MIT Licensed, see [LICENSE](https://github.com/halogenica/Hugo-BeautifulHugo/blob/master/LICENSE).
+MIT Licensed, see [LICENSE](https://github.com/jonocarroll/Hugo-BeautifulHugo/blob/master/LICENSE).
