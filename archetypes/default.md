@@ -9,16 +9,13 @@ tags: []
 ---
 
 ```{r, setup, include = FALSE}
-library(dplyr)
-library(forcats)
-library(roperators)
-
 knitr::opts_chunk$set(
   class.output  = "bg-success",
   class.message = "bg-info text-info",
   class.warning = "bg-warning text-warning",
   class.error   = "bg-danger text-danger"
 )
+knitr::opts_chunk$set(fig.path = "") 
 ```
 
 
